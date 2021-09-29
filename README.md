@@ -24,7 +24,7 @@ To Run the app run `npx serve`. then open `http://localhost:5000` in browser.
 
 ## Internals
 
-- Loads persona sdk using bellow code 
+- Loads [persona sdk](https://docs.withpersona.com/docs/quickstart-embedded-flow) using bellow code
  ```<script src="https://cdn.withpersona.com/dist/persona-v4.0.0.js"></script>```
 - The `verify` function collects all information from input fields.and it will call persona client methods.
 - In a real-life integration, the `templateId` and `environment` would have to be requested from `idv-template` api.
