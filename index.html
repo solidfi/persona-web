@@ -1,0 +1,78 @@
+<!-- Copyright 2021 Solid Financial Technologies, Inc -->
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div id="inputs">
+            <input id="person-id" placeholder="Person ID" required />
+            <br />
+            <br />
+            <input id="template-id" placeholder="Template Id" required />
+            <br />
+            <br />
+            <select id="environment" placeholder="Environment" required>
+                <option value="sandbox">Sandbox</option>
+                <option value="production">Production</option>
+            </select>
+
+            <br />
+            <br />
+
+            <button id="btn">Verify</button>
+            <br />
+            <br />
+        </div>
+        <h3>Logs:</h3>
+        <div id="log">
+            
+        </div>
+        <script src="https://cdn.withpersona.com/dist/persona-v4.0.0.js" type="text/javascript"></script>
+        <script>
+            /**
+             * log
+             */
+            var logger = document.getElementById('log');
+            function log() {
+                for (var i = 0; i < arguments.length; i++) {
+                    if (typeof arguments[i] == 'object') {
+                        logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+                    } else {
+                        logger.innerHTML += arguments[i] + '<br />';
+                    }
+                }
+            }
+
+
+            function verify() {
+                var personId = document.getElementById('person-id').value;
+                var templateId = document.getElementById('template-id').value;
+                var environment = document.getElementById('environment').value;
+                
+                if(personId !== '' && templateId !== '' && environment !== '' && window.Persona) {
+                    var client = new window.Persona.Client({
+                        templateId: templateId,
+                        referenceId: personId,
+                        environment: environment,
+                        onReady: function(){
+                            log('ready');
+                            client.open();
+                        },
+                        onComplete: ({ inquiryId, status, fields }) => {
+                            log(`Completed inquiry ${inquiryId} with status ${status}`, fields);
+                            let payload = {
+                                inquiry_id: inquiryId
+                            };
+                            log('this payload needs to share with submit api', payload);
+                        },
+                        onEvent: function(eventName, metadata) {
+                            log('new event:'+ eventName + 'fields:', metadata);
+                        }
+                    });
+                }
+            }
+            document.getElementById('btn').addEventListener('click', verify);
+        </script>
+    </body>
+</html>
