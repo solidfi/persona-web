@@ -2,27 +2,55 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <style>
+            input, select {
+                width: 250px;
+                height: 35px;
+                outline: none;
+                border-radius: 4px;
+                box-shadow: none;
+                border: 1px solid #d6d6d6;
+                padding: 0px 10px;
+                height: 48px;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #141414;
+                color: #fff;
+                height: 38px;
+                font-weight: 500;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                display: inline-block;
+                line-height: 1;
+                white-space: nowrap;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        </style>
     </head>
     <body>
         <div id="inputs">
-            <input id="person-id" placeholder="Person ID" required />
-            <br />
-            <br />
-            <input id="template-id" placeholder="Template Id" required />
-            <br />
-            <br />
-            <select id="environment" placeholder="Environment" required>
-                <option value="sandbox">Sandbox</option>
-                <option value="production">Production</option>
-            </select>
+            <form id="form" action="#">
+                <input id="person-id" placeholder="Person ID" class="input" required />
+                <br />
+                <br />
+                <input id="template-id" placeholder="Template Id" class="input" required />
+                <br />
+                <br />
+                <select id="environment" placeholder="Environment" required>
+                    <option value="sandbox">Sandbox</option>
+                    <option value="production">Production</option>
+                </select>
 
-            <br />
-            <br />
+                <br />
+                <br />
 
-            <button id="btn">Verify</button>
-            <br />
-            <br />
+                <button id="btn" type="submit">Verify</button>
+                <br />
+                <br />
+            </form>
         </div>
         <h3>Logs:</h3>
         <div id="log">
@@ -44,8 +72,8 @@
                 }
             }
 
-
-            function verify() {
+            function verify(e) {
+                e.preventDefault();
                 var personId = document.getElementById('person-id').value;
                 var templateId = document.getElementById('template-id').value;
                 var environment = document.getElementById('environment').value;
@@ -68,11 +96,14 @@
                         },
                         onEvent: function(eventName, metadata) {
                             log('new event:'+ eventName + 'fields:', metadata);
+                        },
+                        onError: function(e) {
+                            log('error:', e);
                         }
                     });
                 }
             }
-            document.getElementById('btn').addEventListener('click', verify);
+            document.getElementById('form').addEventListener('submit', verify);
         </script>
     </body>
 </html>
