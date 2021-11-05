@@ -33,21 +33,12 @@
     <body>
         <div id="inputs">
             <form id="form" action="#">
-                <input id="person-id" placeholder="Person ID" class="input" required />
-                <br />
-                <br />
-                <input id="template-id" placeholder="Template Id" class="input" required />
-                <br />
-                <br />
-                <select id="environment" placeholder="Environment" required>
-                    <option value="sandbox">Sandbox</option>
-                    <option value="production">Production</option>
-                </select>
-
+                <input id="enquiry-url" placeholder="Enquiry url" class="input" required />
                 <br />
                 <br />
 
-                <button id="btn" type="submit">Verify</button>
+
+                <button id="btn" type="submit">Start</button>
                 <br />
                 <br />
             </form>
@@ -56,7 +47,6 @@
         <div id="log">
             
         </div>
-        <script src="https://cdn.withpersona.com/dist/persona-v4.0.0.js" type="text/javascript"></script>
         <script>
             /**
              * log
@@ -72,38 +62,21 @@
                 }
             }
 
-            function verify(e) {
+            function start(e) {
                 e.preventDefault();
-                var personId = document.getElementById('person-id').value;
-                var templateId = document.getElementById('template-id').value;
-                var environment = document.getElementById('environment').value;
+                var enquiryUrl = document.getElementById('enquiry-url').value;
                 
-                if(personId !== '' && templateId !== '' && environment !== '' && window.Persona) {
-                    var client = new window.Persona.Client({
-                        templateId: templateId,
-                        referenceId: personId,
-                        environment: environment,
-                        onReady: function(){
-                            log('ready');
-                            client.open();
-                        },
-                        onComplete: ({ inquiryId, status, fields }) => {
-                            log(`Completed inquiry ${inquiryId} with status ${status}`, fields);
-                            let payload = {
-                                inquiry_id: inquiryId
-                            };
-                            log('this payload needs to share with submit api', payload);
-                        },
-                        onEvent: function(eventName, metadata) {
-                            log('new event:'+ eventName + 'fields:', metadata);
-                        },
-                        onError: function(e) {
-                            log('error:', e);
-                        }
-                    });
+                if(enquiryUrl !== '') {
+                    window.location.href = enquiryUrl + '&redirect-uri='+window.location.origin + '/index.html';
                 }
             }
-            document.getElementById('form').addEventListener('submit', verify);
+            document.getElementById('form').addEventListener('submit', start);
+
+            var urlSearchParams = new URLSearchParams(window.location.search);
+            var params = Object.fromEntries(urlSearchParams.entries());
+            if(params && Object.keys(params).length !== 0) {
+                log('data', params);
+            }
         </script>
     </body>
 </html>
