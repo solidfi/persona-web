@@ -67,7 +67,7 @@
                 var enquiryUrl = document.getElementById('enquiry-url').value;
                 
                 if(enquiryUrl !== '') {
-                    window.location.href = enquiryUrl + '&redirect-uri='+window.location.origin + '/index.html';
+                    window.location.href = enquiryUrl + '&redirect-uri='+window.location.origin;
                 }
             }
             document.getElementById('form').addEventListener('submit', start);
