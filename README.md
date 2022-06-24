@@ -7,7 +7,7 @@ Persona Sample for Web
 - [Run the app](#run-the-app)
 - [Parameters](#Parameters)
 - [Internals](#internals)
-- [API Reference])(#api-reference)
+- [API Reference](#api-reference)
 
 ## Overview
 The purpose of this app is to show how to use the Persona JavaScript SDK.For complete information about the API, head to the [docs](https://docs.withpersona.com/docs).
