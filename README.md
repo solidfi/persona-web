@@ -28,6 +28,6 @@ To Run the app run `npx serve`. then open `http://localhost:5000` in browser.
 - In a real-life integration, the `enquiry-url`  would have to be requested from `idv-submit` api.
 
 
-#API Reference
+## API Reference
 Persona Hosted Flow Integration : https://docs.withpersona.com/docs/quickstart-hosted-flow
 Solid API Integration : https://www.solidfi.com/docs/introduction
