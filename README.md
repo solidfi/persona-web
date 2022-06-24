@@ -29,5 +29,5 @@ To Run the app run `npx serve`. then open `http://localhost:5000` in browser.
 
 
 ## API Reference
-Persona Hosted Flow Integration : https://docs.withpersona.com/docs/quickstart-hosted-flow
-Solid API Integration : https://www.solidfi.com/docs/introduction
+- Persona Hosted Flow Integration : https://docs.withpersona.com/docs/quickstart-hosted-flow
+- Solid API Integration : https://www.solidfi.com/docs/introduction
